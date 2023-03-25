@@ -1,0 +1,92 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+
+struct nodo{
+    int data;
+    struct nodo *sig;
+    struct nodo *ant;
+};
+
+typedef struct nodo Nodo;
+typedef Nodo *NodoPtr;
+
+void crearLista(int size, NodoPtr lista);
+void crearNodo(NodoPtr list, int valor);
+void colocarInicio(NodoPtr nodo);
+void colocarFinal(NodoPtr nodo);
+void recorrerLista(NodoPtr nodo);
+void printHanoi(NodoPtr listA, NodoPtr listB, NodoPtr listC);
+int getListSize(NodoPtr list);
+
+int main(){
+    NodoPtr colA = (NodoPtr) malloc(sizeof(Nodo));
+    NodoPtr colB = (NodoPtr) malloc(sizeof(Nodo));
+    NodoPtr colC = (NodoPtr) malloc(sizeof(Nodo));
+    crearLista(10, colA);
+    recorrerLista(colA -> sig);
+    return 0;
+}
+
+void crearLista(int size, NodoPtr lista){
+    NodoPtr inicio = (NodoPtr) malloc(sizeof(Nodo));
+    inicio -> data = size;
+    inicio -> sig = NULL;
+    inicio -> ant = NULL;
+    lista -> sig = inicio;
+    for(int i = 0; i < size; i++){
+        if(i > 0)
+            inicio = inicio -> sig;
+        crearNodo(inicio, size - i - 1);
+    }
+}
+
+void crearNodo(NodoPtr list, int valor){
+    NodoPtr nodo = (NodoPtr) malloc(sizeof(Nodo));
+    nodo -> data = valor;
+    nodo -> sig = NULL;
+    nodo -> ant = list;
+    list -> sig = nodo;
+}
+
+void recorrerLista(NodoPtr nodo){
+    if(nodo -> sig != NULL){
+        printf("[%p, %d]\n", nodo, nodo -> data);
+        recorrerLista(nodo -> sig);
+    }
+}
+
+void printHanoi(NodoPtr listA, NodoPtr listB, NodoPtr listC){
+    int s1, s2, s3, max;
+    s1 = getListSize(listA -> sig);
+    s2 = getListSize(listB -> sig);
+    s3 = getListSize(listC -> sig);
+    max = s1;
+    if(s2 > max){
+        max = s2;
+    }
+    if(s3 > s1){
+        max = s3;
+    }
+    for(int i = 0; i < max; i++){
+        
+    }
+}
+
+int getListSize(NodoPtr list){
+    if(list == NULL){
+        return 0;
+    }else{
+        return 1 + getListSize(list -> sig);
+    }
+}
+
+// void towerOfHanoi(int n, NodoPtr colA, NodoPtr colB, NodoPtr colC){
+//     if (n == 0) {
+//         return;
+//     }
+//     towerOfHanoi(n - 1, colA, colC, colB);
+//     cout << "Move disk " << n << " from rod " << from_rod
+//          << " to rod " << to_rod << endl;
+//     towerOfHanoi(n - 1, aux_rod, to_rod, from_rod);
+// }
