@@ -34,6 +34,7 @@
 //   reinas - Vector con las posiciones de las reinas
 //   n      - Número de reinas
 
+int cont = 0;
 
 int comprobar (int fila, int reinas[], int n) 
 {
@@ -56,22 +57,22 @@ int comprobar (int fila, int reinas[], int n)
 
 void mostrarTablero (int reinas[], int n)
 {
-  int i,j;
+  int i,j;  
 
   for (i=0; i<n; i++) {
+    cont++;
+      // for (j=0; j<n; j++) {
 
-      for (j=0; j<n; j++) {
+      //     if (reinas[i]==j)
+      //        printf("#");
+      //     else
+      //        printf("-");
+      // }
 
-          if (reinas[i]==j)
-             printf("#");
-          else
-             printf("-");
-      }
-
-      printf(" %d %d\n",i,reinas[i]);
+      printf("[%d,%d],\n",i,reinas[i]);
   }
 
-  printf("\n");
+  printf("\n %d", cont / 8);
 }
 
 

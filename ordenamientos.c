@@ -8,6 +8,7 @@ void buble(int size, int *arr);
 void bubbleStep(int size, int *arr);
 void insertion(int size, int *arr);
 void insertionStep(int size, int initial, int actual, int*arr);
+void selectionSort(int size, int *arr);
 
 int main(){
     int *arr;
@@ -16,7 +17,7 @@ int main(){
     arr = createArr(size);
     fill(size, arr);
     printArr(size, arr);
-    buble(20, arr);
+    selectionSort(20, arr);
     printArr(size, arr);
 }
 
@@ -94,5 +95,22 @@ void insertionStep(int size, int initial, int actual, int*arr){
             insertionStep(size + 1, 0, actual, arr);
         }
 
+    }
+}
+
+void selectionSort(int size, int *arr){
+    int *ar2 = arr;
+    for(int i = 0; i < size; i++){
+        int max = 0, position;
+        for(int j = 0; j < size - i; j++){
+            if(*ar2 > max){
+                max = *ar2;
+                position = j;
+            }
+            ar2++;
+        }
+        ar2 = arr;
+        arr[position] = arr[size - i];
+        arr[size - i] = max;
     }
 }
